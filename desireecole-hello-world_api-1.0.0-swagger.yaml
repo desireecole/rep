@@ -1,0 +1,47 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "Hello World API"
+
+#basePath: /v1.0
+
+schemes: 
+- https
+- http
+
+host: localhost:8080
+
+paths:
+  /greetings/{name}:
+    get:
+      summary: Generate greeting
+      description: Returns a greeting to the user!
+ #     operationId: hello.post_greeting
+      parameters:
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: The Name of the person to greet.
+      produces:
+        - text/plain;
+      responses:
+        default:
+          description: Bad request
+        200:
+          description: Returns the greeting.
+          schema:
+            $ref: '#/definitions/Message'
+          examples:
+            'application/json':
+              message: 'Hello, there!'
+        400:
+          description: Invalid characters in "name" were provided.
+definitions:
+  Message:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+        default: 'Hello, there!'
